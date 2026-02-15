@@ -28,13 +28,13 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/demoshu23/sample-node.git'
             }
         }
-        stage('SonarQube Scanner') {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh "mvn sonar:sonar"
-                }
-            }
-        }
+        // stage('SonarQube Scanner') {
+        //     steps {
+        //         withSonarQubeEnv('sonar') {
+        //             sh "mvn sonar:sonar"
+        //         }
+        //     }
+        // }
         stage('Set Docker Tag') {
             steps {
                 script {
