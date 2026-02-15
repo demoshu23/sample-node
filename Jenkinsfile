@@ -33,7 +33,15 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh "docker build . -t shu1demo/reponew:${env.DOCKER_TAG}"
+                sh "docker build . -t shu1demo/nodeapp:${env.DOCKER_TAG}"
+            }
+        }
+        stage('Docker push Image to hub') {
+            steps {
+                withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerhubpswd')]) {
+                    sh "docker login -u shu1demo -p ${dockerhubpswd}"
+                    sh "docker push shu1demo/nodeapp:${env.DOCKER_TAG}"
+         
             }
         }
     }
