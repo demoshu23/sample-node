@@ -33,7 +33,7 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh "docker build . -t shu1demo/nodeapp:${env.DOCKER_TAG}"
+                sh "docker build . -t shu1demo/reponew:${env.DOCKER_TAG}"
             }
         }
     }
