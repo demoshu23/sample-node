@@ -16,6 +16,17 @@ pipeline {
                 }
             }
         }
+        stage('Trivy Security Scan') {
+            steps {
+                script {
+                    // Run Trivy scan on the project directory
+                    sh 'trivy fs --exit-code 1 --severity HIGH,CRITICAL .'
+
+                    // If scanning a Docker image instead, use:
+                    // sh 'trivy image --exit-code 1 --severity HIGH,CRITICAL <your-image-name>'
+                }
+            }
+        }
 
         stage('Docker Build') {
             steps {
