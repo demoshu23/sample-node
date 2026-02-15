@@ -18,8 +18,23 @@
 // }
 pipeline {
     agent any
-
+    tools {
+        // Use exact names from Manage Jenkins → Global Tool Configuration
+        maven 'maven-3'     // example: change to match your Maven tool name
+    }
     stages {
+        stage('SCM checkout'){
+            steps{
+                git branch: 'main', url: 'https://github.com/demoshu23/sample-node.git'
+            }
+        }
+        stage('SonarQube Scanner') {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh "mvn sonar:sonar"
+                }
+            }
+        }
         stage('Set Docker Tag') {
             steps {
                 script {
