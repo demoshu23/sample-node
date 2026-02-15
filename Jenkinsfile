@@ -41,6 +41,7 @@ pipeline {
                 withCredentials([string(credentialsId: 'docker-hub', variable: 'dockerhubpswd')]) {
                     sh "docker login -u shu1demo -p ${dockerhubpswd}"
                     sh "docker push shu1demo/nodeapp:${env.DOCKER_TAG}"
+                }
          
             }
         }
